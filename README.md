@@ -67,20 +67,9 @@ rspec
 
 ## Next Steps
 
-1. Add conditional logic for questionnaire subsets, ie:
-```terminal
- if sds 3rd/4th question sets require different calculations:
- subset_id = answer.question.subset_id
- if subset_id == 3
-   global_function_impairment +=value
- elsif subset_id == 4
-   days_lost += value
- elsif subset_id == 5
-   days_unproductive += value
- end
-```
+1. Add conditional logic for questionnaire subsets, ie questionnaire.rb line 47 
 2. To use and reference additional questionnaires
   - add questionnaire / questions into database
   - build calculation methods
 3. Serialize questionnaires / assessments
-4. Add authentication 
+4. Add authentication

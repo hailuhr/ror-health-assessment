@@ -44,6 +44,15 @@ class Questionnaire < ApplicationRecord
       answer = pa.answer
       value = answer.value.to_i
       global_function_impairment += value
+      # if sds 3rd/4th question sets requires different calculations:
+      # subset_id = answer.question.subset_id
+      # if subset_id == 3
+      #   global_function_impairment +=value
+      # elsif subset_id == 4
+      #   days_lost += value
+      # elsif subset_id == 5
+      #   days_unproductive += value
+      # end
     end
 
     global_function_impairment
