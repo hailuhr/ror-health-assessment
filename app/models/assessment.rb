@@ -13,12 +13,9 @@ class Assessment < ApplicationRecord
     self.update(score: calculation)
   end
 
-  # phq9 score 15 >
   def high_risk?
     if questionnaire.questionnaire_type == "PHQ"
-      score > 15
-    else
-      nil
+      score && score > 15
     end
   end
 end

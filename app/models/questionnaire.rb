@@ -37,8 +37,8 @@ class Questionnaire < ApplicationRecord
 
   def calculate_sds_questionnaire(patients_answers)
     global_function_impairment = 0
-    days_lost = 0
-    days_unproductive = 0
+    # days_lost = 0
+    # days_unproductive = 0
 
     patients_answers.each do |pa|
       answer = pa.answer

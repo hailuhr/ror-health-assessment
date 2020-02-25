@@ -4,7 +4,9 @@ RSpec.describe "Assessments", type: :request do
   Rails.application.load_seed
 
   let(:patient) { Patient.create(first_name: "Testing", last_name: "Testerson", date_of_birth: "1/1/2011") }
+  let(:assessment) {  Assessment.create(questionnaire_id: 1, patient_id: 1, assessment_group_id: 1, date: "1/1/2020", assessment_name: "testing") }
   let(:patients_answers) { Assessment.first.patients_answers.map{ |i| i.answer_id } }
+
   let(:valid_assessment_params) {
     {
       assessment: {
