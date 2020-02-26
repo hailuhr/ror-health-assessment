@@ -205,9 +205,12 @@ all_subsets.each do |sub|
   end
 end
 
+assessment_group_one = AssessmentGroup.create(name: "seed group 1")
+assessment_group_two = AssessmentGroup.create(name: "seed group 2")
 
-assessment_one = Assessment.create(questionnaire_id: 1, patient_id: 1, assessment_name: "assessment1", date: "01/01/2001")
-assessment_two = Assessment.create(questionnaire_id: 2, patient_id: 1, assessment_name: "assessment2", date: "02/02/2002")
+
+assessment_one = Assessment.create(questionnaire_id: 1, patient_id: 1, assessment_name: "assessment1", date: "01/01/2001", assessment_group_id: assessment_group_one.id)
+assessment_two = Assessment.create(questionnaire_id: 2, patient_id: 1, assessment_name: "assessment2", date: "02/02/2002", assessment_group_id: assessment_group_two.id)
 
 assessment_one.questionnaire.questions.each { |q| PatientsAnswer.create(assessment_id: assessment_one.id, patient_id: assessment_one.patient.id, answer_id: q.answers.last.id) }
 assessment_two.questionnaire.questions.each { |q| PatientsAnswer.create(assessment_id: assessment_two.id, patient_id: assessment_two.patient.id, answer_id: q.answers.last.id) }
