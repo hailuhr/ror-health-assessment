@@ -32,6 +32,7 @@ class AssessmentsController < ApplicationController
       :questionnaire_id,
       :assessment_name,
       :date,
+      :assessment_group_id,
       patients_answers: [])
   end
 

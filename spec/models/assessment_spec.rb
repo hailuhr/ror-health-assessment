@@ -22,16 +22,33 @@ RSpec.describe Assessment, type: :model do
   end
 
   describe "instance methods" do
+    let(:assessment_group) { AssessmentGroup.create(name: "test group") }
+
     describe "save_score" do
-      let(:assessment) {  Assessment.create(questionnaire_id: 1, patient_id: 1, assessment_group_id: 1, date: "1/1/2020", assessment_name: "testing") }
-      let(:score) { 20 }
+      context "return true when called" do
+        subject {  Assessment.create(questionnaire_id: 1, patient_id: 1, assessment_group_id: assessment_group.id, date: "1/1/2020", assessment_name: "testing") }
 
-      it "return true after being called" do
-        assessment.score = score
-        assessment.save_score
+        its(:save_score) { is_expected.to eq(true) }
+      end
+    end
 
-        expect(assessment.save_score).to eq(true)
-        expect(assessment.score).to eq(30)
+    describe "high_risk?" do
+      context "return true when score is higher than 15" do
+        subject {  Assessment.create(questionnaire_id: 1, patient_id: 1, assessment_group_id: assessment_group.id, date: "1/1/2020", assessment_name: "testing", score: 100) }
+
+        its(:high_risk?) { is_expected.to eq(true) }
+      end
+
+      context "return false when score is lower than 15" do
+        subject {  Assessment.create(questionnaire_id: 1, patient_id: 1, assessment_group_id: assessment_group.id, date: "1/1/2020", assessment_name: "testing", score: 2) }
+
+        its(:high_risk?) { is_expected.to eq(false) }
+      end
+
+      context "return nil when score is nil" do
+        subject {  Assessment.create(questionnaire_id: 1, patient_id: 1, assessment_group_id: assessment_group.id, date: "1/1/2020", assessment_name: "testing", score: nil) }
+
+        its(:high_risk?) { is_expected.to eq(nil) }
       end
     end
   end

@@ -1,15 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe "Assessments", type: :request do
-  Rails.application.load_seed
+  # Rails.application.load_seed
 
   let(:patient) { Patient.create(first_name: "Testing", last_name: "Testerson", date_of_birth: "1/1/2011") }
-  let(:assessment) {  Assessment.create(questionnaire_id: 1, patient_id: 1, assessment_group_id: 1, date: "1/1/2020", assessment_name: "testing") }
-  let(:patients_answers) { Assessment.first.patients_answers.map{ |i| i.answer_id } }
+  let(:assessment_group) { AssessmentGroup.create(name: "test group") }
+  let(:assessment) {  Assessment.create(questionnaire_id: 1, patient_id: 1, assessment_group_id: assessment_group.id, date: "1/1/2020", assessment_name: "testing") }
+  let(:patients_answers) { [4, 8, 12, 16, 20, 24, 28, 32, 36, 40] }
 
   let(:valid_assessment_params) {
     {
       assessment: {
+        assessment_group_id: assessment_group.id,
         patient_id: patient.id,
         questionnaire_id: Questionnaire.first.id,
         assessment_name: "test assessment",
