@@ -1,20 +1,9 @@
 class Questionnaire < ApplicationRecord
+  has_many :assessments
   has_many :questions
   has_many :answers, through: :questions
-  has_many :assessments
 
   validates_presence_of :name
-
-  def questionnaire_type
-    case name
-      when "Patient Health Questionnaire"
-        "PHQ"
-      when "Sheehan Disability Scale"
-        "SDS"
-      when "SIB"
-        "SIB"
-      end
-  end
 
   def calculate_score(patients_answers)
     if questionnaire_type == "PHQ"
@@ -56,5 +45,16 @@ class Questionnaire < ApplicationRecord
     end
 
     global_function_impairment
+  end
+
+  def questionnaire_type
+    case name
+      when "Patient Health Questionnaire"
+        "PHQ"
+      when "Sheehan Disability Scale"
+        "SDS"
+      when "SIB"
+        "SIB"
+      end
   end
 end

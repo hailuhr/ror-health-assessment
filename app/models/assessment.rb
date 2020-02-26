@@ -7,15 +7,15 @@ class Assessment < ApplicationRecord
 
   validates_presence_of :date, :assessment_name
 
-  def save_score
-    calculation = questionnaire.calculate_score(patients_answers)
-
-    self.update(score: calculation)
-  end
-
   def high_risk?
     if questionnaire.questionnaire_type == "PHQ"
       score && score > 15
     end
+  end
+
+  def save_score
+    calculation = questionnaire.calculate_score(patients_answers)
+
+    self.update(score: calculation)
   end
 end

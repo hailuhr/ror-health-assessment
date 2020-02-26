@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Assessments", type: :request do
-  # Rails.application.load_seed
+  Rails.application.load_seed
 
   let(:patient) { Patient.create(first_name: "Testing", last_name: "Testerson", date_of_birth: "1/1/2011") }
   let(:assessment_group) { AssessmentGroup.create(name: "test group") }

@@ -28,12 +28,13 @@ class AssessmentsController < ApplicationController
 
   def permitted_params
     params.require(:assessment).permit(
-      :patient_id,
-      :questionnaire_id,
       :assessment_name,
-      :date,
       :assessment_group_id,
-      patients_answers: [])
+      :date,
+      :questionnaire_id,
+      :patient_id,
+      patients_answers: []
+      )
   end
 
   def assessment_params

@@ -6,9 +6,9 @@ RSpec.describe Assessment, type: :model do
   describe "database columns" do
     it { is_expected.to have_db_column(:assessment_name) }
     it { is_expected.to have_db_column(:date) }
-    it { is_expected.to have_db_column(:notes) }
     it { is_expected.to have_db_column(:patient_id) }
     it { is_expected.to have_db_column(:questionnaire_id) }
+    it { is_expected.to have_db_column(:notes) }
     it { is_expected.to have_db_column(:score) }
   end
 
@@ -23,14 +23,6 @@ RSpec.describe Assessment, type: :model do
 
   describe "instance methods" do
     let(:assessment_group) { AssessmentGroup.create(name: "test group") }
-
-    describe "save_score" do
-      context "return true when called" do
-        subject {  Assessment.create(questionnaire_id: 1, patient_id: 1, assessment_group_id: assessment_group.id, date: "1/1/2020", assessment_name: "testing") }
-
-        its(:save_score) { is_expected.to eq(true) }
-      end
-    end
 
     describe "high_risk?" do
       context "return true when score is higher than 15" do
@@ -49,6 +41,14 @@ RSpec.describe Assessment, type: :model do
         subject {  Assessment.create(questionnaire_id: 1, patient_id: 1, assessment_group_id: assessment_group.id, date: "1/1/2020", assessment_name: "testing", score: nil) }
 
         its(:high_risk?) { is_expected.to eq(nil) }
+      end
+    end
+
+    describe "save_score" do
+      context "return true when called" do
+        subject {  Assessment.create(questionnaire_id: 1, patient_id: 1, assessment_group_id: assessment_group.id, date: "1/1/2020", assessment_name: "testing") }
+
+        its(:save_score) { is_expected.to eq(true) }
       end
     end
   end

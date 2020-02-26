@@ -9,7 +9,7 @@ RSpec.describe PatientsAnswer, type: :model do
 
   describe "associations" do
     it { should belong_to :answer }
-    it { should belong_to :patient }
     it { should belong_to :assessment }
+    it { should belong_to :patient }
   end
 end
