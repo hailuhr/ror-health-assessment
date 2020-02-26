@@ -37,6 +37,12 @@ RSpec.describe Assessment, type: :model do
         its(:high_risk?) { is_expected.to eq(false) }
       end
 
+      context "return nil when questionnaire type isnt phq" do
+        subject {  Assessment.create(questionnaire_id: 1, patient_id: 1, assessment_group_id: assessment_group.id, date: "1/1/2020", assessment_name: "testing", score: nil) }
+
+        its(:high_risk?) { is_expected.to eq(nil) }
+      end
+
       context "return nil when score is nil" do
         subject {  Assessment.create(questionnaire_id: 1, patient_id: 1, assessment_group_id: assessment_group.id, date: "1/1/2020", assessment_name: "testing", score: nil) }
 
